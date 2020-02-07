@@ -292,7 +292,7 @@ class ApiController extends Controller
 
         echo '<pre>';print_r($_GET);echo '</pre>';
 
-        $key = "mxl";          // 计算签名的KEY 与发送端保持一致
+        $key = "bobo";          // 计算签名的KEY 与发送端保持一致
 
         //验签
         $data = $_GET['data'];  //接收到的数据
