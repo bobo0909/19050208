@@ -16,6 +16,11 @@ class GithubController extends Controller
 
    }
 
+   public function onelist(){
+        $token=$_SERVER['HTTP_TOKEN'];
+
+   }
+
     public function reg(Request $request){
 //        echo "$request->input()";
         $password2 = $request->input('password2');
@@ -42,9 +47,15 @@ class GithubController extends Controller
 
     public function login(Request $request){
 
-        $name = $request->input('name');
+        $data = $request->input();
         $password = $request->input('password');
-        $u = UserModel::where(['name'=>$name])->first();
+        if(strpos($data['account'],'@')){
+            $where=['email'=>$data['account']];
+        }else{
+            $where=['tel'=>$data['account']];
+        }
+        $u = UserModel::where($where)->first();
+//        dd($u);
         if($u){
             //验证密码
             if( password_verify($password,$u->password) ){
@@ -62,7 +73,7 @@ class GithubController extends Controller
                 ];
                 $keys='1905passport';
                 Redis::set($keys,$token);
-                Redis::expire($keys, 3600);
+                Redis::expire($keys, 604800);
             }else{
                 $response = [
                     'errno' => 400003,
