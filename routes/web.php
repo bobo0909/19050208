@@ -39,4 +39,6 @@ Route::get('/login/yq','Api\ApiController@yq');
 // Route::post('/api/user/login','Api\TestController@login');      //用户登录
 // Route::get('/api/show/data','Api\TestController@showData');     //获取数据接口
 // Route::get('/api/user/list','Api\TestController@userList')->middleware('filter');      //用户列表
+Route::get('/decrypt','Api\ApiController@decrypt');//非对称加密
 
+Route::get('/decrypt2','Api\ApiController@decrypt2');//对称加密
